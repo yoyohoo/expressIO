@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="/js/app.js" type="text/javascript" charset="utf-8" async defer></script>
+		<style>
+		.btn {
+			margin: o auto;
+		}
+		#excelTxt {
+			width: 100%;
+			height: 100px;
+			max-height: 150px;
+			margin: 10px auto;
+			padding: 5px;
+			resize: vertical;
+			display: block;
+			border-radius: 2px;
+			border-color: #ccc;
+			box-shadow: 1px 1px 2px 2px #eee;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="col-md-12">
+				<h3>Excel Operation:</h3>
+				<hr>
+				<div class="col-md-8">
+					<a onclick="Excel.read()" href="javascript:" class="btn btn-success">Read from read.xlsx</a>
+					<a onclick="Excel.clear()" href="javascript:" class="btn btn-danger">Reset excel</a>
+					<a onclick="Excel.write()" href="javascript:" class="btn btn-success">Write to write.xlsx</a>
+					<textarea id="excelTxt"></textarea>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
