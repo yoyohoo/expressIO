@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<title>File Operation</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
@@ -27,13 +28,22 @@
 	<body>
 		<div class="container">
 			<div class="col-md-12">
-				<h3>Excel Operation:</h3>
+				<h3>File Operation:</h3>
 				<hr>
 				<div class="col-md-8">
-					<a onclick="Excel.read()" href="javascript:" class="btn btn-success">Read from read.xlsx</a>
+					<a onclick="Excel.read()" href="javascript:" class="btn btn-success">Read excel</a>
 					<a onclick="Excel.clear()" href="javascript:" class="btn btn-danger">Reset excel</a>
-					<a onclick="Excel.write()" href="javascript:" class="btn btn-success">Write to write.xlsx</a>
+					<a onclick="Excel.write()" href="javascript:" class="btn btn-success">Write excel</a>
+					<a onclick="Json.write()" href="javascript:" class="btn btn-success">Write json</a>
 					<textarea id="excelTxt"></textarea>
+				</div>
+				<div class="col-md-4">
+					<div class="well"><small>
+						<p>Install:</p>
+						<p>$ npm install express</p>
+						<p>$ npm install body-parser</p>
+						<p>$ npm install node-xlsx</p>
+					</small></div>
 				</div>
 			</div>
 		</div>
