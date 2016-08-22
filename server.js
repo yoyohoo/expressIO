@@ -2,14 +2,17 @@
  * @Author: xz06213
  * @Date:   2016-06-20 11:32:45
  * @Last Modified by:   xz06213
- * @Last Modified time: 2016-08-19 15:43:44
+ * @Last Modified time: 2016-08-22 16:36:33
  */
 
 'use strict';
 // lib
 var express = require('express'),
+	bodyParser = require('body-parser'),
 	app = express(),
 	path = require('path');
+// parse post data to json
+app.use(bodyParser.json());
 
 // custom
 var excel = require('./js/server/excel'),
@@ -47,17 +50,40 @@ app.get('/', function(req, res) {
 // data function
 app.get('/readExcel/:fileName', function(req, res) {
 	var fileName = req.params.fileName,
-		data = excel.readExcel('./data/excel/' + fileName);
+		data = excel.readExcel(__dirname + '/data/excel/' + fileName);
 	res.send(data);
 })
 app.post('/writeExcel/:fileName', function(req, res) {
+
+	// if (req.headers['x-requested-with'] && req.headers['x-requested-with'].toLowerCase() == 'xmlhttprequest') {
+	// 	// 是AJAX请求
+	// } else {
+	// 	// 普通请求
+	// }
 	var fileName = req.params.fileName,
-		data = req.data,
-		result = excel.writeExcel('./data/excel/' + fileName, data);
+		data = req.body;
+
+	// if (!data) {
+	// 	var body = '',
+	// 		jsonStr;
+	// 	req.on('data', function(chunk) {
+	// 		body += chunk; //读取参数流转化为字符串
+	// 	});
+	// 	req.on('end', function() {
+	// 		try {
+	// 			jsonStr = JSON.parse(body);
+	// 		} catch (err) {
+	// 			jsonStr = null;
+	// 		}
+	// 	})
+	// 	data = jsonStr;
+	// }
+
+	var result = excel.writeExcel(__dirname + '/data/excel/' + fileName, data);
 	res.send(result);
 })
 app.get('/writeJson', function(req, res) {
-	json.writeJson('./data/json/excelData.json', data, function(err) {
+	json.writeJson(__dirname + '/data/json/excelData.json', data, function(err) {
 		if (err) throw err;
 		console.log('It\'s saved!');
 		res.send('ok!');
