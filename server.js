@@ -2,7 +2,7 @@
  * @Author: xz06213
  * @Date:   2016-06-20 11:32:45
  * @Last Modified by:   xz06213
- * @Last Modified time: 2016-08-22 16:36:33
+ * @Last Modified time: 2016-08-22 17:46:28
  */
 
 'use strict';
@@ -82,12 +82,16 @@ app.post('/writeExcel/:fileName', function(req, res) {
 	var result = excel.writeExcel(__dirname + '/data/excel/' + fileName, data);
 	res.send(result);
 })
-app.get('/writeJson', function(req, res) {
-	json.writeJson(__dirname + '/data/json/excelData.json', data, function(err) {
-		if (err) throw err;
-		console.log('It\'s saved!');
-		res.send('ok!');
-	})
+app.get('/readJson/:fileName', function(req, res) {
+	var fileName = req.params.fileName,
+		result = json.readJson(__dirname + '/data/json/' + fileName);
+	res.send(result);
+});
+app.post('/writeJson/:fileName', function(req, res) {
+	var data = req.body,
+		fileName = req.params.fileName,
+		result = json.writeJson(__dirname + '/data/json/' + fileName, data);
+	res.send(result);
 });
 
 // run server
