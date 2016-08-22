@@ -2,7 +2,7 @@
  * @Author: xz06213
  * @Date:   2016-08-16 16:45:06
  * @Last Modified by:   xz06213
- * @Last Modified time: 2016-08-16 18:22:55
+ * @Last Modified time: 2016-08-22 16:27:19
  */
 
 'use strict';
@@ -18,11 +18,12 @@ window.onload = function() {
 		document.getElementById('excelTxt').value = '';
 	}
 	Excel.write = function() {
-		var data = document.getElementById('excelTxt').value;
-		postData('/writeExcel/write.xlsx', data, function(res) {
-			Excel.clear();
-			alert(res);
-		})
+		var data = document.getElementById('excelTxt').value.trim(0);
+		if (data.length)
+			postData('/writeExcel/write.xlsx', data, function(res) {
+				Excel.clear();
+				alert(res);
+			})
 	}
 }
 
@@ -63,7 +64,7 @@ function postData(url, data, callback) {
 	xhr.onload = handler;
 	// xhr.onreadystatechange = handler;
 	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 	xhr.send(data);
 
 	function handler() {
