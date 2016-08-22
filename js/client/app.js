@@ -2,28 +2,46 @@
  * @Author: xz06213
  * @Date:   2016-08-16 16:45:06
  * @Last Modified by:   xz06213
- * @Last Modified time: 2016-08-22 16:27:19
+ * @Last Modified time: 2016-08-22 17:54:17
  */
 
 'use strict';
 
 window.onload = function() {
-	window.Excel = {}
+	window.Excel = {}, window.Json = {};
+	var excelTxt = document.getElementById('excelTxt');
 	Excel.read = function() {
-		requestUrl('/readExcel/read.xlsx', function(data) {
-			document.getElementById('excelTxt').value = data;
+		requestUrl('/readExcel/excel.xlsx', function(data) {
+			excelTxt.value = data;
 		})
 	}
 	Excel.clear = function() {
-		document.getElementById('excelTxt').value = '';
+		excelTxt.value = '';
 	}
 	Excel.write = function() {
-		var data = document.getElementById('excelTxt').value.trim(0);
+		var data = excelTxt.value.trim();
 		if (data.length)
-			postData('/writeExcel/write.xlsx', data, function(res) {
+			postData('/writeExcel/excel.xlsx', data, function(res) {
 				Excel.clear();
-				alert(res);
+				console.info('Write Excel:', res);
 			})
+	}
+	Json.read = function() {
+		requestUrl('/readJson/excel.json', function(data) {
+			excelTxt.value = data;
+		})
+	}
+	Json.write = function() {
+		var data = excelTxt.value.trim();
+		if (data.length)
+			postData('/writeJson/excel.json', data, function(res) {
+				excelTxt.value = 'Loading data after 3 seconds...';
+				console.info('Write Json:', res);
+			})
+
+		setTimeout(function() {
+			Json.read();
+		}, 3000);
 	}
 }
 
